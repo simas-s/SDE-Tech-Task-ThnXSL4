@@ -1,5 +1,5 @@
 terraform {
-  required_version = "1.4.5"
+  required_version = "1.8.5"
 
   backend "gcs" {
     prefix = "state"
@@ -18,9 +18,11 @@ provider "google" {
   region = var.region
 }
 
-resource "google_projcet_service" "required_services" {
+resource "google_project_service" "required_services" {
   for_each = toset([
-    "cloudbuild.googleapis.com"
+    "cloudbuild.googleapis.com",
+    "secretmanager.googleapis.com",
+    "cloudresourcemanager.googleapis.com"
   ])
   service = each.key
   project = var.project_id

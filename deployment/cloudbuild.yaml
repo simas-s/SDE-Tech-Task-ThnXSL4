@@ -1,4 +1,9 @@
 steps:
+  - id: terraform-init
+    name: hashicorp/terraform:1.8
+    args: ["init"]
+    dir: "deployment/terraform"
+
   - id: terraform-apply
     name: hashicorp/terraform:1.8
     args: ["apply", "-auto-approve"]
