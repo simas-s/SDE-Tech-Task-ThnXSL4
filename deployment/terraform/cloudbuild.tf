@@ -13,7 +13,7 @@ resource "google_project_iam_member" "cloudbuild" {
 
 resource "google_cloudbuild_trigger" "merge_main" {
   name = "merge-main"
-  filename = "../cloudbuild.yaml"
+  filename = "/deployment/cloudbuild.yaml"
   service_account = google_service_account.cloudbuild_sa.id
   github {
     owner = "simas-s"
