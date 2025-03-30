@@ -12,7 +12,7 @@ def bq_ingest_weather_data(date: str):
             "humidity": daily_weather["humidity"],
             "condition": daily_weather["weather"]["main"]
         } for city in TARGET_CITIES for daily_weather in get_daily_weather(
-            city_name=city.name,
+            city_name=city.city_name,
             state_code=city.state_code,
             country_code=city.country_code,
             date=datetime.strptime(date, "%Y-%m-%d")
