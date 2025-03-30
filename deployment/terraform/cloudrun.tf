@@ -43,6 +43,6 @@ resource "google_cloud_scheduler_job" "daily_ingest" {
 
   http_target {
     http_method = "POST"
-    uri = "https://${google_cloud_run_v2_job.weather_ingest.location}-run-googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_id}/jobs/${google_cloud_run_v2_job.weather_ingest.name}:run"
+    uri = "https://${google_cloud_run_v2_job.weather_ingest.location}-run-googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_number}/jobs/${google_cloud_run_v2_job.weather_ingest.name}:run"
   }
 }
