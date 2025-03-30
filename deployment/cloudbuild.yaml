@@ -6,7 +6,7 @@ steps:
     dir: "deployment/terraform"
 
   - id: terraform-apply
-    name: hashicorp/terraform:1.8
+    name: hashicorp/terraform:1.11
     args: ["apply", "-auto-approve"]
     dir: "deployment/terraform"
 
