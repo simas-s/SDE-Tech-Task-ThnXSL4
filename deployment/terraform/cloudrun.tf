@@ -1,3 +1,18 @@
+resource "google_service_account" "cloudrun_sa" {
+  account_id   = "cloudrun-service-acc"
+  display_name = "Cloud Run Service Account"
+  project      = var.project_id
+}
+
+resource "google_project_iam_member" "cloudbuild" {
+  for_each = toset([
+    "roles/secretmanager.secretAccessor",
+    "roles/iam.serviceAccountUser"])
+  project = var.project_id
+  role = each.key
+  member = "serviceAccount:${google_service_account.cloudrun_sa.email}"
+}
+
 resource "google_cloud_run_v2_job" "weather_ingest" {
   name = "ingest-daily-weather"
   location = var.region
@@ -6,6 +21,7 @@ resource "google_cloud_run_v2_job" "weather_ingest" {
     template {
       containers {
         image = "europe-west2-docker.pkg.dev/essencemediacom-technical/containers/ingest:latest"
+        service_account = google_service_account.cloudrun_sa.email
       }
     }
   }
