@@ -1,7 +1,7 @@
 logsBucket: "gs://${PROJECT_ID}-cloud-build-logs"
 steps:
   - id: terraform-init
-    name: hashicorp/terraform:1.8
+    name: hashicorp/terraform:1.11
     args: ["init"]
     dir: "deployment/terraform"
 
