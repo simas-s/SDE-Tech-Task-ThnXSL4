@@ -23,6 +23,11 @@ resource "google_cloud_run_v2_job" "weather_ingest" {
 
       containers {
         image = "europe-west2-docker.pkg.dev/essencemediacom-technical/containers/ingest:latest"
+
+        env {
+          name = "PROJECT_ID"
+          value = var.project_id
+        }
       }
     }
   }

@@ -4,8 +4,10 @@ from dataclasses import dataclass
 @dataclass
 class City:
     city_name: str
-    state_code: str = None
+    state_code: str = ""
     country_code: str = "US"
+    lat: float = None
+    lon: float = None
 
 
 TARGET_CITIES = (
