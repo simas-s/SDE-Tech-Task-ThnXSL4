@@ -15,6 +15,21 @@ resource "google_project_iam_member" "cloudrun" {
   member = "serviceAccount:${google_service_account.cloudrun_sa.email}"
 }
 
+resource "google_service_account" "cloud_scheduler_sa" {
+  account_id = "cloudscheduler-service-acc"
+  display_name = "Cloud Scheduler Service Account"
+  project = var.project_id
+}
+
+resource "google_project_iam_member" "cloudscheduler" {
+  for_each = toset([
+  "roles/run.invoker",
+  "roles/iam.serviceAccountUser"])
+  project = var.project_id
+  role = each.key
+  member = "serviceAccount:${google_service_account.cloud_scheduler_sa.email}"
+}
+
 resource "google_cloud_run_v2_job" "weather_ingest" {
   name = "ingest-daily-weather"
   location = var.region
@@ -43,6 +58,9 @@ resource "google_cloud_scheduler_job" "daily_ingest" {
 
   http_target {
     http_method = "POST"
-    uri = "https://${google_cloud_run_v2_job.weather_ingest.location}-run-googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_number}/jobs/${google_cloud_run_v2_job.weather_ingest.name}:run"
+    uri = "https://${var.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_number}/jobs/${google_cloud_run_v2_job.weather_ingest.name}:run"
+    oauth_token {
+      service_account_email = google_service_account.cloud_scheduler_sa.email
+    }
   }
 }
