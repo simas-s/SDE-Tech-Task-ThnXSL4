@@ -5,7 +5,7 @@ resource "google_service_account" "cloudbuild_sa" {
 }
 
 resource "google_project_iam_member" "cloudbuild" {
-  for_each = toset(["roles/iam.securityAdmin", "roles/editor"])
+  for_each = toset(["roles/iam.securityAdmin", "roles/editor", "roles/cloudbuild.builds.editor"])
   project = var.project_id
   role = each.key
   member = "serviceAccount:${google_service_account.cloudbuild_sa.email}"
