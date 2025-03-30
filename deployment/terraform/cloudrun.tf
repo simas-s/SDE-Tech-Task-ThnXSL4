@@ -34,3 +34,15 @@ resource "google_cloud_run_v2_job" "weather_ingest" {
     }
   }
 }
+
+resource "google_cloud_scheduler_job" "daily_ingest" {
+  name = "daily-ingest"
+  schedule = "0 9 * * *"
+  region = var.region
+  project = var.project_id
+
+  http_target {
+    http_method = "POST"
+    uri = "https://${google_cloud_run_v2_job.weather_ingest.location}-run-googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_id}/jobs/${google_cloud_run_v2_job.weather_ingest.name}:run"
+  }
+}
