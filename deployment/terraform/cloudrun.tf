@@ -4,7 +4,7 @@ resource "google_service_account" "cloudrun_sa" {
   project      = var.project_id
 }
 
-resource "google_project_iam_member" "cloudbuild" {
+resource "google_project_iam_member" "cloudrun" {
   for_each = toset([
     "roles/secretmanager.secretAccessor",
     "roles/iam.serviceAccountUser"])
