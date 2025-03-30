@@ -4,6 +4,13 @@ resource "google_service_account" "cloudbuild_sa" {
   project      = var.project_id
 }
 
+resource "google_project_iam_member" "cloudbuild" {
+  for_each = toset(["roles/iam.securityAdmin", "roles/editor"])
+  project = var.project_id
+  role = each.key
+  member = "serviceAccount:${google_service_account.cloudbuild_sa.email}"
+}
+
 resource "google_cloudbuild_trigger" "merge_main" {
   name = "merge-main"
   filename = "../cloudbuild.yaml"

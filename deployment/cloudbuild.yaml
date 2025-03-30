@@ -9,18 +9,18 @@ steps:
     args: ["apply", "-auto-approve"]
     dir: "deployment/terraform"
 
-#  - id: build-container
-#    name: "gcr.io/cloud-builders/docker"
-#    args: [
-#            build,
-#            --tag, "europe-west2-docker.pkgdev/essencemediacom-technical/containers/ingest:latest",
-#            --file, "Dockerfile",
-#            "."
-#    ]
-#
-#  - id: push-container
-#    name: "gcr.io/cloud-builders/docker"
-#    args: [
-#            push, "europe-west2-docker.pkgdev/essencemediacom-technical/containers/ingest",
-#            "--all-tags"
-#    ]
+  - id: build-container
+    name: "gcr.io/cloud-builders/docker"
+    args: [
+            build,
+            --tag, "europe-west2-docker.pkgdev/essencemediacom-technical/containers/ingest:latest",
+            --file, "Dockerfile",
+            "."
+    ]
+
+  - id: push-container
+    name: "gcr.io/cloud-builders/docker"
+    args: [
+            push, "europe-west2-docker.pkgdev/essencemediacom-technical/containers/ingest",
+            "--all-tags"
+    ]
