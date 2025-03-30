@@ -21,7 +21,7 @@ def city_name_to_coordinates(city_name: str, state_code: str, country_code: str)
     return lat, lon
 
 
-def get_daily_weather(city_name: str, state_code: str, country_code: str, date: datetime):
+def get_daily_weather(city_name: str, state_code: str, country_code: str, date: datetime) -> dict:
     lat, lon = city_name_to_coordinates(city_name=city_name, state_code=state_code, country_code=country_code)
 
     # Convert provided date into UNIX time
