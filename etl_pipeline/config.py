@@ -8,7 +8,7 @@ class City:
     country_code: str = "US"
 
 
-TARGET_CITIES = {
+TARGET_CITIES = (
     City(city_name="Sioux Falls"),
     City(city_name="Great Falls"),
     City(city_name="Houghton", state_code="Michigan"),
@@ -20,4 +20,4 @@ TARGET_CITIES = {
     City(city_name="Glasgow", state_code="Montana"),
     City(city_name="Omaha"),
     City(city_name="Portland")
-}
+)
