@@ -14,6 +14,7 @@ def bq_ingest_weather_data(date: str, target_dataset: str = "raw", target_table:
             "city_name": city.city_name,
             "state_code": city.state_code,
             "country_code": city.country_code,
+            "date": date,
             "temp": daily_weather["temp"],
             "humidity": daily_weather["humidity"],
             "condition": daily_weather["weather"][0]["main"]

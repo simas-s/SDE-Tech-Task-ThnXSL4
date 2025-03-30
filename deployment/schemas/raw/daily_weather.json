@@ -12,6 +12,10 @@
     "type": "STRING"
   },
   {
+    "name": "date",
+    "type": "DATE"
+  },
+  {
     "name": "temp",
     "type": "FLOAT"
   },
