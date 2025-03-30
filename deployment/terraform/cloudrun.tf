@@ -19,9 +19,10 @@ resource "google_cloud_run_v2_job" "weather_ingest" {
 
   template {
     template {
+      service_account = google_service_account.cloudrun_sa.email
+
       containers {
         image = "europe-west2-docker.pkg.dev/essencemediacom-technical/containers/ingest:latest"
-        service_account = google_service_account.cloudrun_sa.email
       }
     }
   }
