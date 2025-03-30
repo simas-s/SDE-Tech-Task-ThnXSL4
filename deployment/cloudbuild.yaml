@@ -14,7 +14,7 @@ steps:
     name: "gcr.io/cloud-builders/docker"
     args: [
             build,
-            --tag, "europe-west2-docker.pkgdev/essencemediacom-technical/containers/ingest:latest",
+            --tag, "europe-west2-docker.pkg.dev/essencemediacom-technical/containers/ingest:latest",
             --file, "Dockerfile",
             "."
     ]
@@ -22,6 +22,6 @@ steps:
   - id: push-container
     name: "gcr.io/cloud-builders/docker"
     args: [
-            push, "europe-west2-docker.pkgdev/essencemediacom-technical/containers/ingest",
+            push, "europe-west2-docker.pkg.dev/essencemediacom-technical/containers/ingest",
             "--all-tags"
     ]
