@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class City:
+    """Dataclass containing city details"""
     city_name: str
     state_code: str = ""
     country_code: str = "US"
@@ -10,6 +11,7 @@ class City:
     lon: float = None
 
 
+# Cities for which data will be ingested
 TARGET_CITIES = (
     City(city_name="Sioux Falls"),
     City(city_name="Great Falls"),

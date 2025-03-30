@@ -11,8 +11,10 @@ def get_secret_value(secret_id: str, version: str = "latest"):
     :param version: Determines which version of the provided secret this function will return.
     :return: Value of provided secret version.
     """
+    # Instantiate secret client
     client = SecretManagerServiceClient()
     secret_name = f"projects/{PROJECT_ID}/secrets/{secret_id}/versions/{version}"
+    # Access and decode secret value
     response = client.access_secret_version(request={"name": secret_name})
     return response.payload.data.decode("UTF-8")
 

@@ -9,6 +9,13 @@ PROJECT_ID = getenv("PROJECT_ID", default=None)
 
 
 def bq_ingest_weather_data(date: str, target_dataset: str = "raw", target_table: str = "daily_weather"):
+    """
+    Function to read weather data for target cities for a given date, and load it into BigQuery.
+    :param date: Target date for weather data.
+    :param target_dataset: Dataset containing destination table.
+    :param target_table: Name of destination table.
+    """
+    # Create JSON formatted list of rows
     rows = [
         {
             "city_name": city.city_name,
@@ -24,12 +31,14 @@ def bq_ingest_weather_data(date: str, target_dataset: str = "raw", target_table:
         )]
     ]
 
+    # Instantiate client and job config
     bq_client = Client()
     load_job_config = LoadJobConfig()
 
     dataset_ref = DatasetReference(project=PROJECT_ID, dataset_id=target_dataset)
     target_table = TableReference(dataset_ref=dataset_ref, table_id=target_table)
 
+    # Load rows into table
     bq_client.load_table_from_json(json_rows=rows, destination=target_table, job_config=load_job_config)
 
 
